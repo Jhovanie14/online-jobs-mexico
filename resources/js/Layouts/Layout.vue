@@ -1,14 +1,16 @@
 <script setup>
-import NavBar from '../Components/NavBar.vue';
+import NavBar from "../Components/NavBar.vue";
+import Footer from "../Components/Footer.vue";
 </script>
 
 <template>
-    <div>
+    <div class="min-h-screen">
         <header class="bg-green-700 text-white">
-          <NavBar/>
+            <NavBar />
         </header>
-        <main class="p-4">
-            <slot/>
+        <main class="flex-grow p-8">
+            <slot />
         </main>
+        <Footer />
     </div>
 </template>

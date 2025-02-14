@@ -18,26 +18,26 @@ defineProps({
         >
             <div class="text-center">
                 <h1
-                    class="text-3xl font-semibold text-gray-700 sm:text-4xl md:text-6xl"
+                    class="text-3xl font-semibold text-gray-800 sm:text-4xl md:text-5xl"
                 >
                     {{ title }}
                 </h1>
-                <p class="my-4 text-sm text-black md:text-2xl">
+                <p class="my-4 text-sm text-black md:text-lg">
                     {{ subTitle }}
                 </p>
             </div>
         </div>
         <div class="container-xl">
             <div
-                class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-2 rounded-lg "
+                class="max-w-4xl md:max-w-3xl lg:max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 rounded-lg "
             >
                 <div class="px-3 py-6">
-                    <h2 class="flex text-2xl">
+                    <h2 class="flex text-2xl text-gray-700">
                         Looking for
-                        <p class="font-bold text-green-500 px-2">Talent?</p>
+                        <p class="font-bold text-[#006847] px-2">Talent?</p>
                     </h2>
-                    <p class="mt-2 mb-4">
-                        Browse our Vue jobs and start your career today
+                    <p class="mt-2 mb-4 text-xs md:text-sm text-gray-700 text-nowrap lg:text-wrap">
+                        Outline the key responsibilities and skills to find the ideal candidate.
                     </p>
                     <div class="flex items-center">
                         <div class="relative flex-1">
@@ -63,12 +63,12 @@ defineProps({
                     </div>
                 </div>
                 <div class="px-3 py-6">
-                    <h2 class="flex text-2xl">
+                    <h2 class="flex text-2xl text-gray-700">
                         Looking for
                         <p class="font-bold text-[#CF1024] px-2">Work?</p>
                     </h2>
-                    <p class="mt-2 mb-4">
-                        List your job to find the perfect developer for the role
+                    <p class="mt-2 mb-4 text-xs md:text-sm text-gray-700 text-nowrap">
+                        Browse our jobs and start your career today.
                     </p>
                     <div class="flex items-center gap-4">
                         <div class="relative flex-1">
@@ -88,7 +88,7 @@ defineProps({
                                 rounded-full py-2 absolute right-2 top-1/2 -translate-y-1/2 hover:bg-[#009847]
                                 transition-colors duration-200"
                             >
-                                Add Job
+                                Search
                             </Link>
                         </div>
                     </div>

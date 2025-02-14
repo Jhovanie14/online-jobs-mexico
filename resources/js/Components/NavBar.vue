@@ -59,14 +59,16 @@ onUnmounted(() => {
                 >
                     <!-- Logo -->
                     <Link class="flex flex-shrink-0 items-center mr-4" href="/">
-                        <img
-                            class="h-10 w-auto"
-                            :src="'/images/logo.png'"
-                            alt="Vue Jobs"
-                        />
                         <span
-                            class="flex items-baseline text-[#006847] text-2xl font-light ml-2"
-                            >OnlineJobs | <p class="text-sm px-1">Mx</p></span
+                            class="flex items-center text-[#006847] text-2xl font-light ml-2"
+                        >
+                            <img
+                                class="h-10 w-auto"
+                                :src="'/images/ojm.png'"
+                                alt="Vue Jobs"
+                            />
+                            |
+                            <p class="text-sm px-1">Mx</p></span
                         >
                     </Link>
                     <!-- Desktop menu -->
@@ -76,7 +78,7 @@ onUnmounted(() => {
                         >
                             <div class="relative" ref="dropDownref">
                                 <button
-                                    class="text-gray-700 font-normal py-2"
+                                    class="text-gray-700 font-normal py-2 text-nowrap"
                                     @click="toggleDropDown"
                                 >
                                     How it works
@@ -109,27 +111,29 @@ onUnmounted(() => {
                             </div>
                             <Link
                                 href="/pricing"
-                                class="text-gray-700 font-normal py-2 rounded-3xl"
+                                class="text-gray-700 font-normal py-2"
                                 >Pricing</Link
                             >
                             <Link
                                 href="/job/post"
-                                class="text-white bg-[#006847] font-semibold text-lg px-4 py-1 rounded-3xl uppercase hover:bg-[#009847]"
+                                class="text-white bg-[#006847] font-semibold text-nowrap text-lg px-5 py-1 rounded-3xl uppercase hover:bg-[#009847]"
                                 >Post A Job</Link
                             >
                             <Link
                                 href="/jobs"
-                                class="text-white bg-[#CF1024] font-semibold text-lg px-4 py-1 rounded-3xl uppercase hover:bg-[#822d2a]"
+                                class="text-white bg-[#CF1024] font-semibold text-nowrap text-lg px-5 py-1 rounded-3xl uppercase hover:bg-[#822d2a]"
                                 >Find Jobs</Link
                             >
+                            <!-- Separator -->
+                            <div class="h-8 w-px bg-gray-300 mx-2"></div>
                             <Link
                                 href="/login"
-                                class="text-[#006847] font-semibold rounded-md uppercase"
+                                class="text-[#006847] font-semibold uppercase text-nowrap"
                                 >Log In</Link
                             >
                             <Link
-                                href="/sign-in"
-                                class="text-[#006847] font-semibold rounded-md uppercase"
+                                href="/Sign-up"
+                                class="text-[#006847] font-semibold uppercase text-nowrap"
                                 >Sign Up</Link
                             >
                         </div>
@@ -174,22 +178,6 @@ onUnmounted(() => {
         <!-- Mobile menu -->
         <div v-show="mobileMenuOpen" class="md:hidden bg-white border-t">
             <div class="px-4 py-3">
-                <Link href="/pricing" class="block py-2 text-gray-700"
-                    >Pricing</Link
-                >
-                <Link href="/job/post" class="block py-2 text-[#006847]"
-                    >Post A Job</Link
-                >
-                <Link href="/jobs" class="block py-2 text-[#CF1024]"
-                    >Find Jobs</Link
-                >
-                <Link href="/jobs/add" class="block py-2 text-[#006847]"
-                    >Log In</Link
-                >
-                <Link href="/sign-in" class="block py-2 text-[#006847]"
-                    >Sign Up</Link
-                >
-
                 <!-- Dropdown inside mobile menu -->
                 <div class="relative" ref="mobileDropDownref">
                     <button
@@ -227,6 +215,21 @@ onUnmounted(() => {
                         >
                     </div>
                 </div>
+                <Link href="/pricing" class="block py-2 text-gray-700"
+                    >Pricing</Link
+                >
+                <Link href="/job/post" class="block py-2 text-[#006847]"
+                    >Post A Job</Link
+                >
+                <Link href="/jobs" class="block py-2 text-[#CF1024]"
+                    >Find Jobs</Link
+                >
+                <Link href="/login" class="block py-2 text-[#006847]"
+                    >Log In</Link
+                >
+                <Link href="/Sign-up" class="block py-2 text-[#006847]"
+                    >Sign Up</Link
+                >
             </div>
         </div>
     </nav>
