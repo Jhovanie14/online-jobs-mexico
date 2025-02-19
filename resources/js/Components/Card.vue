@@ -1,18 +1,24 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 
 defineProps({
     bg: {
         type: String,
-        default: 'bg-gray-100'
+        default: "bg-gray-100",
+    },
+    shadow: {
+        type: String,
+        default: "",
+    },
+    padding: {
+        type: String,
+        default: ""
     }
-})
+});
 </script>
 
 <template>
-     <div :class="`${bg} p-6 rounded-lg shadow-md`">
-        <slot>
-            
-        </slot>
-     </div>
+    <div :class="`${bg} ${padding} rounded-md ${shadow}`">
+        <slot> </slot>
+    </div>
 </template>
