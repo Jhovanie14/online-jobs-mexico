@@ -339,7 +339,7 @@
                                                 Job Seeker FAQ
                                             </Link>
                                             <Link
-                                                href="/logout"
+                                                href="/learn-to-outsource"
                                                 class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                                             >
                                                 Learn To OutSource
