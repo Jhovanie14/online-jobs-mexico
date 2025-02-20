@@ -11,6 +11,10 @@ const form = useForm({
 const submit = () => {
     form.post("/login", {
         preserveScroll: true,
+        onError: () => {
+            form.reset("email");
+            form.reset("password");
+        },
         onSuccess: () => form.reset("password"),
     });
 };
@@ -41,12 +45,7 @@ const submit = () => {
                                 type="email"
                                 class="appearance-none rounded-md relative block w-full px-3 py-4 text-sm bg-gray-100 placeholder-gray-900 text-gray-700 focus:outline-none focus:ring-4 focus:ring-green-200"
                             />
-                            <div
-                                v-if="form.errors.email"
-                                class="text-red-500 text-sm mt-1"
-                            >
-                                {{ form.errors.email }}
-                            </div>
+                            
                         </div>
                         <div class="space-y-2">
                             <label for="password" class="text-sm text-gray-700"

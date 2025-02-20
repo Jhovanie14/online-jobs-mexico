@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,14 +28,14 @@ class AuthController extends Controller
         // Return user data as a resource
         return to_route('dashboard');
     }
-    public function authenticate(Request $request,)
+    public function authenticate(LoginRequest $request,)
     {
-        $credentials = $request->validate([
-            'email' => 'required',
-            'password' => 'required|min:8'
-        ]);
+        // $credentials = $request->validate([
+        //     'email' => 'required',
+        //     'password' => 'required'
+        // ]);
 
-        if (!Auth::attempt($credentials)) {
+        if (!Auth::attempt($request->only('email', 'password'))) {
             return back()->withErrors(['email' => 'Invalid email or password.']);
         }
         $request->session()->regenerate();

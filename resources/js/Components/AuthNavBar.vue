@@ -40,6 +40,7 @@ watch(() => usePage().url, closeDropDown);
                                 :src="'/images/ojm.png'"
                                 alt="Logo"
                                 class="h-14 w-auto"
+/>
                             />
                         </span>
                     </Link>

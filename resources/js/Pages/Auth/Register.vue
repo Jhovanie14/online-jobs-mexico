@@ -38,7 +38,14 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post("/register");
+    form.post("/register", {
+        preserveScroll: true,
+        onError: () => {
+            form.reset("email");
+            form.reset("password");
+        },
+        onSuccess: () => form.reset("password"),
+    });
 };
 </script>
 
@@ -81,6 +88,7 @@ const submit = () => {
                             <input
                                 v-model="form.email"
                                 type="email"
+                                name="email"
                                 class="appearance-none rounded-md relative block w-full px-3 py-4 text-sm bg-gray-100 placeholder-gray-900 text-gray-700 focus:outline-none focus:ring-4 focus:ring-green-200"
                             />
                             <div

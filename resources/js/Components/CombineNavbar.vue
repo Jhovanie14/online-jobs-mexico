@@ -96,7 +96,7 @@
                             <!-- Job Board Button -->
                             <Link
                                 href=""
-                                class="bg-[#006847] text-white px-4 py-2 rounded-full font-medium hover:bg-green-600"
+                                class="bg-[#006847] text-white px-4 py-2 rounded-full font-medium hover:bg-[#009847]"
                             >
                                 JOB BOARD
                             </Link>
@@ -199,7 +199,7 @@
                         </div>
 
                         <button
-                            class="w-full bg-green-500 text-white py-2 rounded-full font-medium hover:bg-green-600"
+                            class="w-full bg-[#006847] text-white py-2 rounded-full font-medium hover:bg-[#009847]"
                         >
                             JOB BOARD
                         </button>
