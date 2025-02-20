@@ -4,6 +4,7 @@ import Footer from "../Components/Footer.vue";
 import { usePage } from "@inertiajs/vue3";
 import AuthNavBar from "../Components/AuthNavBar.vue";
 import { computed } from "vue";
+import CombineNavbar from "../Components/CombineNavbar.vue";
 
 
 // const page = usePage().props.auth;
@@ -16,12 +17,7 @@ const auth = computed(() => usePage().props.auth);
 <template>
     <div class="min-h-screen">
         <header class="bg-green-700 text-white">
-            <div v-if="auth?.user">
-                <AuthNavBar/>
-            </div>
-            <div v-else>
-                <NavBar />
-            </div>
+            <CombineNavbar />
         </header>
         <main class="flex-1">
             <slot />

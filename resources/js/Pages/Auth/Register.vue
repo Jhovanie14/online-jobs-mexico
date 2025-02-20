@@ -3,7 +3,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 import Card from "../../Components/Card.vue";
 import Recaptcha from "../../Components/Recaptcha.vue";
 import { reactive } from "vue";
-import { router, useForm } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 
 const isOpen = ref(true);
 const Slideref = ref(null); //Desktop Menu
@@ -56,8 +56,9 @@ const submit = () => {
             ref="Slideref"
             class="fixed px-2 w-full md:top-0 md:right-0 md:h-full md:bg-white md:w-[450px] z-50 transform transition-transform duration-500"
             :class="{
-                'translate-x-0': isOpen,
                 'translate-x-full': !isOpen,
+
+                'translate-x-0': isOpen,
             }"
         >
             <div class="w-full bg-white px-3 py-2">
@@ -134,7 +135,6 @@ const submit = () => {
                         </div>
                         <div class="space-x-2">
                             <input
-                               
                                 type="checkbox"
                                 name="terms&conditions"
                                 id="terms&conditions"
@@ -168,3 +168,6 @@ const submit = () => {
         </div>
     </section>
 </template>
+<style scoped>
+
+</style>

@@ -1,59 +1,19 @@
 <script setup lang="ts">
 import { usePage } from "@inertiajs/vue3";
-import { ref, onMounted, onUnmounted, computed } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 
-const page = usePage();
-const dropDownref = ref<HTMLElement | null>(null);
-const mobileDropDownref = ref<HTMLElement | null>(null);
-const mobileMenuref = ref<HTMLElement | null>(null);
 const dropDownOpen = ref(false);
 const mobiledropDownOpen = ref(false);
 const mobileMenuOpen = ref(false);
 
-//toggle dropdown
-const toggleDropDown = () => {
-    dropDownOpen.value = !dropDownOpen.value;
-};
-
-// Toggle mobile menu
 const toggleMobileMenu = () => {
     mobileMenuOpen.value = !mobileMenuOpen.value;
 };
 
-//Toggle mobile dropdown
-const toggleMobileDropdown = () => {
-    mobiledropDownOpen.value = !mobiledropDownOpen.value;
-};
+const closeDropDown = () => (mobileMenuOpen.value = false);
 
-const handleClickOutside = (event) => {
-    // Debugging: Check if event fires
-    // console.log("Click detected");
-    // console.log("Dropdown Ref:", dropDownref.value);
-    const target = event.target as Node;
+watch(() => usePage().url, closeDropDown);
 
-    // Close desktop dropdown if clicked outside
-    if (dropDownref.value && !dropDownref.value.contains(target)) {
-        dropDownOpen.value = false;
-    }
-
-    // Close mobile dropdown if clicked outside
-    if (mobileDropDownref.value && !mobileDropDownref.value.contains(target)) {
-        mobiledropDownOpen.value = false;
-    }
-    if (mobileMenuref.value && !mobileMenuref.value.contains(target)) {
-        mobileMenuOpen.value = false;
-    }
-};
-
-onMounted(() => {
-    // console.log("Event listener added");
-    document.addEventListener("click", handleClickOutside);
-});
-
-onUnmounted(() => {
-    // console.log("Event listener removed");
-    document.removeEventListener("click", handleClickOutside);
-});
 </script>
 
 <template>
@@ -83,10 +43,11 @@ onUnmounted(() => {
                         <div
                             class="hidden md:flex items-center space-x-4 font-sans md:text-sm"
                         >
-                            <div class="relative" ref="dropDownref">
+                            <div class="relative">
                                 <button
                                     class="text-gray-700 font-normal py-2 text-nowrap"
-                                    @click="toggleDropDown"
+                                    @click="dropDownOpen = !dropDownOpen"
+                                    @blur="dropDownOpen = false"
                                 >
                                     How it works
                                     <i class="fa-solid fa-chevron-down"></i>
@@ -116,6 +77,7 @@ onUnmounted(() => {
                                     </Link>
                                 </div>
                             </div>
+
                             <Link
                                 href="/pricing"
                                 class="text-gray-700 font-normal py-2"
@@ -183,12 +145,15 @@ onUnmounted(() => {
             </div>
         </div>
         <!-- Mobile menu -->
-        <div v-show="mobileMenuOpen" class="md:hidden bg-white border-t">
+        <div
+            v-if="mobileMenuOpen"
+            class="md:hidden bg-white border-t"
+        >
             <div class="px-4 py-3">
                 <!-- Dropdown inside mobile menu -->
-                <div class="relative" ref="mobileDropDownref">
+                <div class="relative mobile-dropdown">
                     <button
-                        @click="toggleMobileDropdown"
+                        @click="mobiledropDownOpen = !mobiledropDownOpen"
                         class="w-full text-left text-gray-700 py-2 flex items-center gap-1"
                     >
                         How it works
@@ -211,33 +176,55 @@ onUnmounted(() => {
                         v-show="mobiledropDownOpen"
                         class="ml-4 border-l pl-4 mt-2"
                     >
-                        <Link href="/profile" class="block py-2 text-gray-700"
+                        <Link
+                            href="/employer/FAQ"
+                            class="block py-2 text-gray-700"
+                            @click="closeDropDown"
                             >Employer FAQ</Link
                         >
-                        <Link href="/settings" class="block py-2 text-gray-700"
+                        <Link
+                            href="/jobseeker/FAQ"
+                            class="block py-2 text-gray-700"
+                            @click="closeDropDown"
                             >Job Seeker FAQ</Link
                         >
-                        <Link href="/logout" class="block py-2 text-gray-700"
+                        <Link
+                            href="/learn-to-outsource"
+                            class="block py-2 text-gray-700"
+                            @click="closeDropDown"
                             >Learn To OutSource</Link
                         >
                     </div>
                 </div>
-                <div @click="toggleMobileMenu">
-                    <Link href="/pricing" class="block py-2 text-gray-700"
+                <div>
+                    <Link
+                        href="/pricing"
+                        class="block py-2 text-gray-700"
+                        @click="closeDropDown"
                         >Pricing</Link
                     >
-                    <Link href="/job/post" class="block py-2 text-[#006847]"
+                    <Link
+                        href="/job/post"
+                        class="block py-2 text-[#006847]"
+                        @click="closeDropDown"
                         >Post A Job</Link
                     >
                     <Link
                         href="/jobseeker/jobsearch"
                         class="block py-2 text-[#CF1024]"
+                        @click="closeDropDown"
                         >Find Jobs</Link
                     >
-                    <Link href="/login" class="block py-2 text-[#006847]"
+                    <Link
+                        href="/login"
+                        class="block py-2 text-[#006847]"
+                        @click="closeDropDown"
                         >Log In</Link
                     >
-                    <Link href="/Sign-up" class="block py-2 text-[#006847]"
+                    <Link
+                        href="/Sign-up"
+                        class="block py-2 text-[#006847]"
+                        @click="closeDropDown"
                         >Sign Up</Link
                     >
                 </div>
