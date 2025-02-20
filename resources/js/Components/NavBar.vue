@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { usePage } from "@inertiajs/vue3";
+import { ref, onMounted, onUnmounted, computed } from "vue";
 
+const page = usePage();
 const dropDownref = ref<HTMLElement | null>(null);
 const mobileDropDownref = ref<HTMLElement | null>(null);
+const mobileMenuref = ref<HTMLElement | null>(null);
 const dropDownOpen = ref(false);
 const mobiledropDownOpen = ref(false);
 const mobileMenuOpen = ref(false);
@@ -37,6 +40,9 @@ const handleClickOutside = (event) => {
     if (mobileDropDownref.value && !mobileDropDownref.value.contains(target)) {
         mobiledropDownOpen.value = false;
     }
+    if (mobileMenuref.value && !mobileMenuref.value.contains(target)) {
+        mobileMenuOpen.value = false;
+    }
 };
 
 onMounted(() => {
@@ -54,27 +60,28 @@ onUnmounted(() => {
     <nav class="bg-white border-b">
         <div class="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
             <div class="flex h-20 items-center justify-between">
-                <div
-                    class="flex flex-1 items-center justify-start md:items-stretch"
-                >
+                <div class="flex flex-1 items-center justify-start">
                     <!-- Logo -->
-                    <Link class="flex flex-shrink-0 items-center mr-4" href="/">
+                    <Link
+                        class="flex justify-center items-center mr-4"
+                        href="/"
+                    >
                         <span
-                            class="flex items-center text-[#006847] text-2xl font-light ml-2"
+                            class="flex place-items-center text-[#006847] text-2xl font-light"
                         >
                             <img
-                                class="h-10 w-auto"
+                                class="h-14 w-auto"
                                 :src="'/images/ojm.png'"
                                 alt="Vue Jobs"
                             />
-                            |
-                            <p class="text-sm px-1">Mx</p></span
-                        >
+                            <div class="h-8 w-px border border-[#006847]"></div>
+                            <p class="text-sm px-1">Mx</p>
+                        </span>
                     </Link>
                     <!-- Desktop menu -->
                     <div class="md:ml-auto">
                         <div
-                            class="hidden md:flex items-center space-x-4 font-sans text-sm"
+                            class="hidden md:flex items-center space-x-4 font-sans md:text-sm"
                         >
                             <div class="relative" ref="dropDownref">
                                 <button
@@ -116,12 +123,12 @@ onUnmounted(() => {
                             >
                             <Link
                                 href="/job/post"
-                                class="text-white bg-[#006847] font-semibold text-nowrap text-lg px-5 py-1 rounded-3xl uppercase hover:bg-[#009847]"
+                                class="text-white bg-[#006847] font-medium text-nowrap text-lg py-1.5 px-6 rounded-3xl uppercase hover:bg-[#009847]"
                                 >Post A Job</Link
                             >
                             <Link
-                                href="/jobs"
-                                class="text-white bg-[#CF1024] font-semibold text-nowrap text-lg px-5 py-1 rounded-3xl uppercase hover:bg-[#822d2a]"
+                                href="/jobseeker/jobsearch"
+                                class="text-white bg-[#CF1024] font-medium text-nowrap text-lg py-1.5 px-6 rounded-3xl uppercase hover:bg-[#ff4640]"
                                 >Find Jobs</Link
                             >
                             <!-- Separator -->
@@ -215,21 +222,25 @@ onUnmounted(() => {
                         >
                     </div>
                 </div>
-                <Link href="/pricing" class="block py-2 text-gray-700"
-                    >Pricing</Link
-                >
-                <Link href="/job/post" class="block py-2 text-[#006847]"
-                    >Post A Job</Link
-                >
-                <Link href="/jobs" class="block py-2 text-[#CF1024]"
-                    >Find Jobs</Link
-                >
-                <Link href="/login" class="block py-2 text-[#006847]"
-                    >Log In</Link
-                >
-                <Link href="/Sign-up" class="block py-2 text-[#006847]"
-                    >Sign Up</Link
-                >
+                <div @click="toggleMobileMenu">
+                    <Link href="/pricing" class="block py-2 text-gray-700"
+                        >Pricing</Link
+                    >
+                    <Link href="/job/post" class="block py-2 text-[#006847]"
+                        >Post A Job</Link
+                    >
+                    <Link
+                        href="/jobseeker/jobsearch"
+                        class="block py-2 text-[#CF1024]"
+                        >Find Jobs</Link
+                    >
+                    <Link href="/login" class="block py-2 text-[#006847]"
+                        >Log In</Link
+                    >
+                    <Link href="/Sign-up" class="block py-2 text-[#006847]"
+                        >Sign Up</Link
+                    >
+                </div>
             </div>
         </div>
     </nav>
