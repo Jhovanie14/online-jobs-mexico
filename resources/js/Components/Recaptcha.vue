@@ -45,7 +45,7 @@
       // Log window.grecaptcha before rendering
     //   console.log(window.grecaptcha);  
       window.grecaptcha.render(recaptcha.value, {
-        sitekey: '6LdMedkqAAAAACTGpoPktHMVUC1AnLc0xZJLbnu3',
+        sitekey: '6LcsFN0qAAAAAND1TRUSqys1rukp-c9iB_s2HmKZ',
         callback: onRecaptchaVerified,
       });
     } else {
