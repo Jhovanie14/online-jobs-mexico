@@ -4,7 +4,6 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::inertia('sample', 'Sample');
     Route::inertia('/', 'Home')->name('home');
     Route::inertia('/pricing', 'Pricing')->name('pricing');
     Route::inertia('/jobseeker/jobsearch', 'Jobs/JobListings');
