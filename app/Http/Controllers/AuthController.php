@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Models\Profile;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -24,14 +26,41 @@ class AuthController extends Controller
 
     public function store(RegisterRequest $request)
     {
-        if (!$this->verifyRecaptcha($request->input('g-recaptcha-response'))) {
-            return back()->withErrors(['recaptcha' => 'ReCAPTCHA verification failed.']);
-        }
-
         $user = User::create($request->validated());
+
+        Profile::create(['user_id' => $user->id]);
+
+
         Auth::login($user);
 
-        return to_route('dashboard');
+        $user->sendEmailVerificationNotification();
+        
+        return redirect()->route('verification.notice');
+    }
+
+    public function showVerificationNotice()
+    {
+        if (!Auth::check()) {
+            return redirect('/login')->withErrors(['message' => 'You must be logged in to verify your email.']);
+        }
+
+        return Inertia::render('Auth/VerifyEmail');
+    }
+
+    public function verify(EmailVerificationRequest $request)
+    {
+        $request->fulfill();
+
+        $request->user()->refresh();
+
+        return redirect()->route('skills.index');
+    }
+
+    public function resendVerificationEmail(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('message', 'Verification link sent!');
     }
 
     public function authenticate(LoginRequest $request)

@@ -48,6 +48,7 @@ const handleClickOutside = (event) => {
 // function to handle recaptcha
 const onRecaptchaVerified = (response) => {
     recaptchaResponse.value = response;
+    form["g-recaptcha-response"] = response;
 };
 onMounted(() => {
     document.addEventListener("click", handleClickOutside);
@@ -62,7 +63,7 @@ onUnmounted(() => {
 const form = useForm({
     email: null,
     password: null,
-    "g-recaptcha-response": recaptchaResponse.value,
+    // "g-recaptcha-response": recaptchaResponse.value,
 });
 
 const submit = () => {
@@ -274,9 +275,9 @@ const submit = () => {
                             {{ form.errors.recaptcha }}
                         </div>
                         <!-- rechaptcha verified -->
-                        <div class="flex justify-center">
+                        <!-- <div class="flex justify-center">
                             <Recaptcha @verified="onRecaptchaVerified" />
-                        </div>
+                        </div> -->
                         <button
                             type="submit"
                             :disabled="form.processing"
@@ -403,8 +404,8 @@ const submit = () => {
                         <div class="space-x-2">
                             <input
                                 type="checkbox"
-                                name="terms&conditions"
-                                id="terms&conditions"
+                                name="employer_terms&conditions"
+                                id="employer_terms&conditions"
                                 required
                             />
                             <label for="" class="text-sm text-gray-700"
@@ -425,9 +426,9 @@ const submit = () => {
                             {{ form.errors.recaptcha }}
                         </div> -->
                         <!-- rechaptcha verified -->
-                        <div class="flex justify-center">
+                        <!-- <div class="flex justify-center">
                             <Recaptcha @verified="onRecaptchaVerified" />
-                        </div>
+                        </div> -->
                         <button
                             type="submit"
                             :disabled="form.processing"

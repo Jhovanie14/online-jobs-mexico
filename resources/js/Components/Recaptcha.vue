@@ -7,6 +7,7 @@
   <script setup>
   import { ref, onMounted } from 'vue';
   
+  const emit = defineEmits(['verified']);
   const recaptcha = ref(null);
   
   const onRecaptchaVerified = (response) => {

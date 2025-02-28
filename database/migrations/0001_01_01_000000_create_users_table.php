@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
             $table->string('email')->unique();
             
-            $table->string('phone')->nullable();
             $table->string('profile_picture')->nullable();
-            $table->enum('role',['employer','job_seeker']);
+            $table->enum('role',['employer','job_seeker'])->default('job_seeker');
             $table->enum('status', ['active','inactive','suspended'])->default('active');
             
             $table->timestamp('email_verified_at')->nullable();

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="auth?.user">
+        <div v-if="user">
             <!-- AuthNavBar content -->
             <nav class="bg-white shadow-md py-3 border-b">
                 <div class="mx-auto max-w-6xl px-2 sm:px-4 lg:px-6">
@@ -10,7 +10,7 @@
                             <!-- Logo -->
                             <Link
                                 class="flex justify-center items-center"
-                                href="dashboard"
+                                href="/dashboard"
                             >
                                 <span
                                     class="flex place-items-center text-[#006847] text-2xl font-light"
@@ -96,7 +96,7 @@
                             <!-- Job Board Button -->
                             <Link
                                 href="job-board"
-                                class="bg-[#006847] text-white px-4 py-2 rounded-full font-medium hover:bg-[#009847]"
+                                class="bg-green text-white px-4 py-2 rounded-full font-medium hover:bg-green-light"
                             >
                                 JOB BOARD
                             </Link>
@@ -117,12 +117,17 @@
                                     @blur="isOpen = false"
                                 >
                                     <img
+                                        v-if="auth.user.avatar"
                                         :src="auth.user.avatar"
                                         alt="User Avatar"
                                         class="w-8 h-8 rounded-full border"
                                     />
+                                    <i
+                                        v-else
+                                        class="fa-solid fa-user text-gray-500"
+                                    ></i>
                                     <span class="text-gray-700">
-                                        {{ auth.user.email }}
+                                        {{ auth.user.name ?? auth.user.email }}
                                     </span>
                                 </button>
                                 <transition
@@ -139,7 +144,7 @@
                                     >
                                         <div class="border-b">
                                             <Link
-                                                href="/profile"
+                                                :href="`/jobseeker/info/${auth.user.id}`"
                                                 class="block px-4 py-2 text-gray-800 hover:text-blue-500 hover:bg-gray-100"
                                             >
                                                 My Profile
@@ -204,7 +209,7 @@
                         </div>
 
                         <button
-                            class="w-full bg-[#006847] text-white py-2 rounded-full font-medium hover:bg-[#009847]"
+                            class="w-full bg-green text-white py-2 rounded-full font-medium hover:bg-green-light"
                         >
                             JOB BOARD
                         </button>
@@ -222,10 +227,15 @@
                                 @blur="mobileIsOpen = false"
                             >
                                 <img
+                                    v-if="auth.user.avatar"
                                     :src="auth.user.avatar"
                                     alt="User Avatar"
                                     class="w-8 h-8 rounded-full border"
                                 />
+                                <i
+                                    v-else
+                                    class="fa-solid fa-user text-gray-500"
+                                ></i>
                                 <span class="text-gray-700">
                                     {{ auth.user.email }}
                                 </span>
@@ -245,7 +255,7 @@
                                     <div class="border-b">
                                         <Link
                                             @click="closeDropDown"
-                                            href="/profile"
+                                            :href="`/jobseeker/info/${auth.user.id}`"
                                             class="block px-4 py-2 text-gray-800 hover:text-blue-500 hover:bg-gray-100"
                                         >
                                             My Profile
@@ -365,13 +375,12 @@
                                     >
                                     <Link
                                         href="/job/post"
-                                        class="text-white bg-[#006847] font-medium text-nowrap 
-                                        text-lg py-1.5 px-6 rounded-3xl uppercase hover:bg-[#009847]"
+                                        class="text-white bg-green font-medium text-nowrap text-lg py-1.5 px-6 rounded-3xl uppercase hover:bg-green-light"
                                         >Post A Job</Link
                                     >
                                     <Link
                                         href="/jobseeker/jobsearch"
-                                        class="text-white bg-[#CF1024] font-medium text-nowrap text-lg py-1.5 px-6 rounded-3xl uppercase hover:bg-[#ff4640]"
+                                        class="text-white bg-red font-medium text-nowrap text-lg py-1.5 px-6 rounded-3xl uppercase hover:bg-red-light"
                                         >Find Jobs</Link
                                     >
                                     <!-- Separator -->
@@ -487,25 +496,25 @@
                             >
                             <Link
                                 href="/job/post"
-                                class="block py-2 text-[#006847]"
+                                class="block py-2 text-green"
                                 @click="closeDropDown"
                                 >Post A Job</Link
                             >
                             <Link
                                 href="/jobseeker/jobsearch"
-                                class="block py-2 text-[#CF1024]"
+                                class="block py-2 text-red"
                                 @click="closeDropDown"
                                 >Find Jobs</Link
                             >
                             <Link
                                 href="/login"
-                                class="block py-2 text-[#006847]"
+                                class="block py-2 text-green"
                                 @click="closeDropDown"
                                 >Log In</Link
                             >
                             <Link
                                 href="/sign-up"
-                                class="block py-2 text-[#006847]"
+                                class="block py-2 text-green"
                                 @click="closeDropDown"
                                 >Sign Up</Link
                             >
@@ -521,6 +530,10 @@
 import { usePage } from "@inertiajs/vue3";
 import { computed } from "vue";
 import { ref, watch, onMounted, onUnmounted } from "vue";
+
+const page = usePage();
+
+const user = computed(() => page.props.auth.user);
 
 const dropDownOpen = ref(false);
 const mobiledropDownOpen = ref(false);
