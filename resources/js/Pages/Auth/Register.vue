@@ -2,7 +2,6 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import Card from "../../Components/Card.vue";
 import Recaptcha from "../../Components/Recaptcha.vue";
-import { reactive } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
 const isWorkerOpen = ref(true);
